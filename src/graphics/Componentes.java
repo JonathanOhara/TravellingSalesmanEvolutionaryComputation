@@ -32,12 +32,14 @@ public class Componentes {
     private ArrayList<JTextField> 	textFieldPosicaoXList;
     private ArrayList<JTextField> 	textFieldPosicaoYList;
     private JButton		botaoRedefinirPosicao;
+    private JButton		botaoRandomizarPosicao;
     
     private JButton		buttonGerarPopuacaoInicial;
     private JButton		buttonNovaGeracao;
     private JButton		buttonDezNovasGeracoes;
     private JButton		buttonCemNovasGeracoes;
     private JButton		buttonMilNovasGeracoes;
+    private JButton		buttonGerarIteracoesInifinitamente;
     private JButton		buttonDijkstra;
     
     private JLabel labelCaminho;
@@ -336,6 +338,23 @@ public class Componentes {
 
 	public void setCheckElitismo(JCheckBox checkElitismo) {
 		this.checkElitismo = checkElitismo;
+	}
+
+	public JButton getButtonGerarIteracoesInifinitamente() {
+		return buttonGerarIteracoesInifinitamente;
+	}
+
+	public void setButtonGerarIteracoesInifinitamente(
+			JButton buttonGerarIteracoesInifinitamente) {
+		this.buttonGerarIteracoesInifinitamente = buttonGerarIteracoesInifinitamente;
+	}
+
+	public JButton getBotaoRandomizarPosicao() {
+		return botaoRandomizarPosicao;
+	}
+
+	public void setBotaoRandomizarPosicao(JButton botaoRandomizarPosicao) {
+		this.botaoRandomizarPosicao = botaoRandomizarPosicao;
 	}
 
 }

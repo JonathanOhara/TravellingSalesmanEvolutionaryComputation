@@ -12,9 +12,13 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
+import thread.GerarGeracoes;
 import algoritmos.CE;
 
 public class ActionsListener implements ActionListener{
+	
+	private Thread threadGeracoes = null;
+	private GerarGeracoes gerarGeracoes = null;
 	private Componentes componentes;
 	
 	public ActionsListener(Componentes componentes){
@@ -30,6 +34,8 @@ public class ActionsListener implements ActionListener{
 						System.exit(0);
 					}else if(e.getSource() == componentes.getBotaoRedefinirPosicao()){
 						redefinirPosicaoTodasCidades();
+					}else if(e.getSource() == componentes.getBotaoRandomizarPosicao()){
+						randomizarPosicaoTodasCidades();
 					}else if(e.getSource() == componentes.getButtonGerarPopuacaoInicial()){
 						gerarPopulacaoInicial();
 					}else if(e.getSource() == componentes.getButtonNovaGeracao()){
@@ -40,6 +46,8 @@ public class ActionsListener implements ActionListener{
 						gerarCemGeracoes();
 					}else if(e.getSource() == componentes.getButtonMilNovasGeracoes()){
 						gerarMilGeracoes();
+					}else if(e.getSource() == componentes.getButtonGerarIteracoesInifinitamente()){
+						pararGerarIteracoes();
 					}else{
 						for (int i = 0; i < CE.TAMANHO; i++) {
 							if(e.getSource() == componentes.getButtonDesenharList().get(i)){
@@ -53,6 +61,32 @@ public class ActionsListener implements ActionListener{
 		).start();
 	}
 
+	private void randomizarPosicaoTodasCidades(){
+		componentes.startLoading();
+		
+		JTextField posicaoX, posicaoY;
+		
+		int MIN_X = -10;
+		int MIN_Y = -8;
+		
+		int MAX_X = 10;
+		int MAX_Y = 8;
+		
+		for( int i = 0; i < componentes.getTextFieldPosicaoXList().size(); i++ ){
+			posicaoX = componentes.getTextFieldPosicaoXList().get(i);
+			posicaoY = componentes.getTextFieldPosicaoYList().get(i);
+			
+			posicaoX.setText( String.valueOf((int) MIN_X + (int)(Math.random() * ((MAX_X - MIN_X) + 1))) );
+			posicaoY.setText( String.valueOf((int) MIN_Y + (int)(Math.random() * ((MAX_Y - MIN_Y) + 1))) );
+		}
+		
+		redefinirPosicaoTodasCidades();
+		
+		componentes.getCanvas().repaint();
+		
+		componentes.stopLoading();
+	}
+	
 	private void redefinirPosicaoTodasCidades(){
 		componentes.startLoading();
 		
@@ -107,7 +141,7 @@ public class ActionsListener implements ActionListener{
 		componentes.getTextFieldFitnessMedio().setText(String.valueOf( CE.fitnessMedio ).substring(0, 10));
 	}
 	
-	private void gerarNovaGeracao(){
+	public void gerarNovaGeracao(){
 		CE.executar( componentes.getComboCrossOver().getSelectedItem().toString(), componentes.getComboMutacao().getSelectedItem().toString(), componentes.getCheckSalvacionismo().isSelected(), componentes.getCheckElitismo().isSelected());
 		for (int i = 0; i < CE.TAMANHO; i++) {
 			ArrayList<JTextField> textos = componentes.getTextFieldCaminhoList().get(i);
@@ -150,6 +184,31 @@ public class ActionsListener implements ActionListener{
 			gerarNovaGeracao();
 		}
 		componentes.stopLoading();	
+	}
+	
+	private void pararGerarIteracoes(){
+		componentes.startLoading();
+		
+		if( threadGeracoes == null ){
+			gerarGeracoes = new GerarGeracoes(this);
+			threadGeracoes = new Thread( gerarGeracoes );
+			
+			componentes.getButtonGerarIteracoesInifinitamente().setText("Parar Geração");
+			
+			threadGeracoes.start();
+		}else{
+			try {
+				gerarGeracoes.stop();
+				threadGeracoes.join();
+				componentes.getButtonGerarIteracoesInifinitamente().setText("Gerar novas Gerações");
+				threadGeracoes = null;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		componentes.stopLoading();
 	}
 	
 	private void desenharCaminho(int caminho){

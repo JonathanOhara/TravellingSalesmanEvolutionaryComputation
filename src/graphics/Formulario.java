@@ -178,8 +178,14 @@ public class Formulario {
 		componentes.setBotaoRedefinirPosicao(new JButton("Redefinir Posições"));
 		componentes.getBotaoRedefinirPosicao().setBounds(x, PADDING_Y + y + 5 , 300, LINE_HEIGHT);
 		componentes.getBotaoRedefinirPosicao().addActionListener( action );
-
 		componentes.getJanela().add(componentes.getBotaoRedefinirPosicao());
+		
+		y+= 20;
+		
+		componentes.setBotaoRandomizarPosicao(new JButton("Randomizar Posições"));
+		componentes.getBotaoRandomizarPosicao().setBounds(x, PADDING_Y + y + 5 , 300, LINE_HEIGHT);
+		componentes.getBotaoRandomizarPosicao().addActionListener( action );
+		componentes.getJanela().add(componentes.getBotaoRandomizarPosicao());
 	}
 	
 	private void inicializaOpcoesCE(){
@@ -272,9 +278,9 @@ public class Formulario {
 		x = PADDING_X;
 		y += LINE_HEIGHT * 1.0f;
 		
-		componentes.setButtonDezNovasGeracoes( new JButton("10 Novas Gerações") );
-		componentes.getButtonDezNovasGeracoes().setBounds(x, y, 280, (int) (LINE_HEIGHT * 1.0f));
-		componentes.getButtonDezNovasGeracoes().addActionListener(action);
+		componentes.setButtonCemNovasGeracoes( new JButton("100 Novas Gerações") );
+		componentes.getButtonCemNovasGeracoes().setBounds(x, y, 280, (int) (LINE_HEIGHT * 1.0f));
+		componentes.getButtonCemNovasGeracoes().addActionListener(action);
 		
 		x += 300;
 		
@@ -290,9 +296,9 @@ public class Formulario {
 		x = PADDING_X;
 		y += LINE_HEIGHT * 1.0f;
 		
-		componentes.setButtonCemNovasGeracoes( new JButton("100 Novas Gerações") );
-		componentes.getButtonCemNovasGeracoes().setBounds(x, y, 280, (int) (LINE_HEIGHT * 1.0f));
-		componentes.getButtonCemNovasGeracoes().addActionListener(action);
+		componentes.setButtonGerarIteracoesInifinitamente( new JButton("Gerar novas Gerações") );
+		componentes.getButtonGerarIteracoesInifinitamente().setBounds(x, y, 280, (int) (LINE_HEIGHT * 1.0f));
+		componentes.getButtonGerarIteracoesInifinitamente().addActionListener(action);
 		
 		
 		x += 300;
@@ -317,8 +323,8 @@ public class Formulario {
 		
 		componentes.getJanela().add( componentes.getButtonGerarPopuacaoInicial() );
 		componentes.getJanela().add( componentes.getButtonNovaGeracao() );
-		componentes.getJanela().add( componentes.getButtonDezNovasGeracoes() );
 		componentes.getJanela().add( componentes.getButtonCemNovasGeracoes() );
+		componentes.getJanela().add( componentes.getButtonGerarIteracoesInifinitamente() );
 		componentes.getJanela().add( componentes.getLabelCrossOver() );
 		componentes.getJanela().add( componentes.getComboCrossOver() );
 		componentes.getJanela().add( componentes.getLabelMutacao() );

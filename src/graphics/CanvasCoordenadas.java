@@ -55,7 +55,6 @@ public class CanvasCoordenadas extends JPanel{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		System.out.println("CanvasCoordenadas.paint()");
 		graphics = (Graphics2D) g;
 		
 		limpar();

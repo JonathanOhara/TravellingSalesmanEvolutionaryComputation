@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class CE {
-	private static boolean debug = true;
+	private static boolean debug = false;
 	
 	public static ArrayList<Integer> caminhoDisponiveisList;
 	public static ArrayList<Point2D> posicaoCidadesList;	
