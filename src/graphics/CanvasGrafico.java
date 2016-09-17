@@ -78,6 +78,8 @@ public class CanvasGrafico extends JPanel{
 	    
 	    //Mostrando Fitness Maximo
 	    graphics.drawString( String.valueOf( fitnessMaximoGrafico ), PADDING_X/10, PADDING_Y);
+	    
+	    graphics.drawString( "Melhor Fitness", (PADDING_X/10) + 280, PADDING_Y);
 
 	    //Mostrando Geracao Maxima
 	    graphics.drawString( String.valueOf( tempoMaximoGrafico ), LARGURA_PANEL-PADDING_X*2, ALTURA_PANEL - PADDING_Y/3);
@@ -110,6 +112,16 @@ public class CanvasGrafico extends JPanel{
 			graphics.setStroke(drawingStroke);
 			graphics.draw( linha );	
 		}
+    	
+    	if( fitnessSize > 1 ){
+	    	double ultimoFitness = fitnessList.get( fitnessSize - 1);
+	    	
+	    	if( fitnessMaximoGrafico > ( ultimoFitness + 5 ) ){
+	    		graphics.setPaint( Color.black );
+	    		graphics.drawString( String.valueOf((int)ultimoFitness), PADDING_X/10, (int)getYGrafico(ultimoFitness));
+	    	}
+    	}
+    	
 	}
 	
 	public void adicionarFitness(double fitness){

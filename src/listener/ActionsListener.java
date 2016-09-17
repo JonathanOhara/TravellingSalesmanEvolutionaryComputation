@@ -136,7 +136,7 @@ public class ActionsListener implements ActionListener{
 			texto.setText( String.valueOf( CE.fitness[i] ).substring(0, 10) );
 		}
 		desenharMelhorCaminho();
-		componentes.getCanvasGrafico().adicionarFitness(CE.fitnessMedio);
+		componentes.getCanvasGrafico().adicionarFitness(getMelhorFitness());
 		
 		componentes.getTextFieldFitnessMedio().setText(String.valueOf( CE.fitnessMedio ).substring(0, 10));
 	}
@@ -157,7 +157,7 @@ public class ActionsListener implements ActionListener{
 		}
 
 		desenharMelhorCaminho();
-		componentes.getCanvasGrafico().adicionarFitness(CE.fitnessMedio);
+		componentes.getCanvasGrafico().adicionarFitness( getMelhorFitness() );
 		
 		componentes.getTextFieldFitnessMedio().setText(String.valueOf( CE.fitnessMedio ).substring(0, 10));
 	}
@@ -238,5 +238,15 @@ public class ActionsListener implements ActionListener{
 			}
 		}
 		desenharCaminho(pos);
+	}
+	
+	private double getMelhorFitness(){
+		double melhorFitness = Double.POSITIVE_INFINITY;
+		for (int i = 0; i < CE.TAMANHO; i++) {
+			if(CE.fitness[i] < melhorFitness){
+				melhorFitness = CE.fitness[i];
+			}
+		}
+		return melhorFitness;
 	}
 }
